@@ -1,0 +1,33 @@
+#  
+#
+#   Vitamin C Multi-User version 1.%R%
+#   Copyright (c) 1985-1990
+#   Creative Programming Consultants, Inc.
+#   P.O. Box 112097
+#   Carrollton, Texas  75006
+#   (214) 416-6447
+#   ALL RIGHTS RESERVED
+#   Last Modification: .%L% on %G% at %U%
+#
+#
+#   Edit routines Makefile
+#
+
+LIBNAME = vc
+CFLAGS = -O -I..\include
+CC = $(Z)
+LIB = $(L)
+RESPONSE = @response
+LIBEND = $(X)
+SIZE = $(S)
+A = $(P)VCED_TEXT
+
+$(M)$(LIBNAME)ed.lib: ..\include\vcstdio.h
+    ..\source\batch\delfiles $(M)$(LIBNAME)ed.lib
+    $(CC) -c $(SIZE) $(CFLAGS) $(A) *.c
+    ..\source\batch\makeresp *.obj
+    $(LIB) $(M)$(LIBNAME)ed $(RESPONSE) $(LIBEND)
+    ..\source\batch\delfiles *.obj
+    ..\source\batch\delfiles response
+
+

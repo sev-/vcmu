@@ -1,0 +1,63 @@
+#   
+#
+#   Vitamin C Multi-User version 1.6
+#   Copyright (c) 1985-1990
+#   Creative Programming Consultants, Inc.
+#   P.O. Box 112097
+#   Carrollton, Texas  75006
+#   (214) 416-6447
+#   ALL RIGHTS RESERVED
+#   Last Modification: .%L% on %G% at %U%
+#
+#
+#   Primary Library Makefile for DOS
+#
+
+LIBNAME = vc
+CFLAGS = -O -I..\include
+CC = $(Z)
+LIB = $(L)
+RESPONSE = @response
+LIBEND = $(X)
+SIZE = $(S)
+A = $(P)TC1_TEXT
+B = $(P)TC2_TEXT
+C = $(P)TC3_TEXT
+D = $(P)TC4_TEXT
+E = $(P)TCM_TEXT
+
+
+$(M)vc.lib: ..\include\vcstdio.h
+	.\batch\delfiles $(M)$(LIBNAME).lib
+	$(CC) -c $(SIZE) $(CFLAGS) $(A) a_h\*.c
+	.\batch\makeresp *.obj
+	$(LIB) $(M)$(LIBNAME) $(RESPONSE) $(LIBEND)
+	.\batch\delfiles *.obj
+	.\batch\delfiles response
+	$(CC) -c $(SIZE) $(CFLAGS) $(B) i_s\*.c 
+	.\batch\makeresp *.obj
+	$(LIB) $(M)$(LIBNAME) $(RESPONSE) $(LIBEND)
+	.\batch\delfiles *.obj
+	.\batch\delfiles $(M)$(LIBNAME).bak
+	.\batch\delfiles response
+	$(CC) -c $(SIZE) $(CFLAGS) $(C) t_v\*.c 
+	.\batch\makeresp *.obj
+	$(LIB) $(M)$(LIBNAME) $(RESPONSE) $(LIBEND)
+	.\batch\delfiles *.obj
+	.\batch\delfiles $(M)$(LIBNAME).bak
+	.\batch\delfiles response
+	$(CC) -c $(SIZE) $(CFLAGS) $(D) w_z\*.c
+	.\batch\makeresp *.obj
+	$(LIB) $(M)$(LIBNAME) $(RESPONSE) $(LIBEND)
+	.\batch\delfiles *.obj
+	.\batch\delfiles $(M)$(LIBNAME).bak
+	.\batch\delfiles response
+	$(CC) -c $(SIZE) $(CFLAGS) $(E) vcm\*.c 
+	.\batch\makeresp *.obj
+	$(LIB) $(M)$(LIBNAME) $(RESPONSE) $(LIBEND)
+	.\batch\delfiles *.obj
+	.\batch\delfiles $(M)$(LIBNAME).bak
+	.\batch\delfiles response
+	$(LIB) $(M)$(LIBNAME) +asm\vctio$(M) $(LIBEND)
+	.\batch\delfiles $(M)$(LIBNAME).bak
+

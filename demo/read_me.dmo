@@ -1,0 +1,18 @@
+What is include in this directory
+
+cookdemo.c             Demo of background printing			
+makefile               Make file for demos
+read_me.dmo            This file
+vccolor.c              Displays default color of Vitamin C
+vcdemo.c               Main demo program (see note 1 )
+vcdemo.msg             Help messages for main demo program
+vcmdemo.c              Menu demo program
+vcsample.c             Simple test program
+testattr.c             Testattr program
+
+Note 1:
+  Before VCDEMO can be executed vcdemo.ndx must be created.  By 
+  compiling the HELPGEN program in the util directory and executing
+  HELPGEN.  HELPGEN will prompt for an input file (vcdemo.msg) and
+  an output file (vcdemo.ndx).
+

@@ -1,0 +1,55 @@
+
+                          ******************
+                          ** INSTRUCTIONS **
+                          ******************
+
+
+You should place the files in there proper directorys then 
+change to the source directory and use the makefile to compile 
+the source code.
+
+DIRECTORIES:
+
+    vc
+      \    +--- demo
+       \   |
+        \  +--- doc
+         +-|
+           +--- etc
+           |
+           +--- edit                    +--- a_h
+           |                            |
+           +--- editor                  +--- i_s
+           |                            |
+           +--- example                 +--- t_v
+           |                          +-|
+           +--- include              /  +--- w_z
+           |                        /   |
+           +--------------- source +    +--- vcm
+           |                            |
+           +--- util                    +--- batch
+                                        |
+                                        +--- asm
+
+
+What is included in this directory
+
+demo                 Directory of demos
+doc                  Directory of last minute corrections
+etc                  Directory contain termcap.vc file (see Note 1)
+edit                 Directory of text editor source code & makefiles
+editor               Directory of a sample stand-alone text editor application.
+example              Directory of some examples
+include              Directory of include files (see Note 2)
+instruct.doc         This file
+source               Directory of all source file 
+util                 Directory of utility programs
+
+Note 1:
+  The termcap.vc file should be moved to /etc directory or the 
+  environment variable VCTERMCAP set to the file to use.
+  (for example -  VCTERMCAP=/usr/vc/etc/termcap.vc;export VCTERMCAP)
+
+Note 2:
+  The include files can be moved to the /usr/include or any directory
+  and use the -I option of the compiler. 

@@ -1,0 +1,57 @@
+How To Use The Makefile in This Directory
+=========================================
+
+FIRST CHANGE THE DEFINES IN vcstdio.h FOR YOUR COMPUTER
+*******************************************************
+
+For System with no memory models or only one
+
+make                    "makes complete system"
+
+For System with memory models that DO NOT !! require ranlib
+  (if you have the program ranlib it is probably required)
+
+make models             "makes all models "
+make large              "makes large model"
+make medium             "makes medium model"
+make small              "makes small model"
+
+For System with memory models that DO !! require ranlib
+  (for example XENIX)
+
+make rmodels             "makes all models "
+make rlarge              "makes large model"
+make rmedium             "makes medium model"
+make rsmall              "makes small model"
+
+*****************************************************************
+These create a library in the source directory call libvc.a, this
+should be given the proper name for the library and model of your
+system and moved to the proper directory !!!!!
+*****************************************************************
+
+ERRORS
+======
+
+OUT OF MEMORY ERROR     Try executing fresh shell and removing some
+      OR                environment variables for example:
+OUT OF ENV. SPACE       "TERMCAP=;export TERMCAP"
+                        If this doesn't work modify the makefile
+                        or just use the build scripts.
+-------------------------------------------------------------------
+ERRORS COMPILING        Picked the wrong compile script or STD
+                        flags need editing
+
+
+PC/MSDOS
+===================================================================
+
+Use the batch file to execute makefile for dos
+The compiler must be properly setup and make.exe must be in the PATH
+This has only been tested on MICROSOFT 5.x and BORLAND 2.x
+
+For example:
+    "MSDOS MSC LARGE"   --      FOR LARGE MICROSOFT LIBRARY
+    "MSDOS BTC MEDIUM"  --      FOR MEDIUM BORLAND C LIBRARY
+
+

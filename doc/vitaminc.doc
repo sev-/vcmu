@@ -1,0 +1,124 @@
+This file describes differences between Vitamin C Multi-user
+and Vitamin C for DOS/OS2.  Many of the concepts used in the
+multi-user version will be reflected in future releases of
+the DOS/OS2 version.  The goal is to have one set of functions
+and conventions that is common across all supported platforms.
+
+The two primary differences are in the areas of windows and key input.
+
+Window differences:
+
+In the multi-user versions, window functions return pointers to a
+window structures not integers.
+
+Vitamin C DOS/OS2
+    COUNT w1,w2;
+    WPTR wp;
+    TEXT *wloc;
+    w1 = wopen(0,0,20,79,"Vitamin C Single-user");
+    w2 = wopen(5,10,15,60,"Another Window");
+    wselect(w1);
+    wp = &winfo[w1];
+    wloc = wp->location;
+    
+Vitamin C Multi-user
+    WPTR w1,w2;
+    TEXT *wloc;
+    w1 = wopen(0,0,20,79,"Vitamin C Multi-user");
+    w2 = wopen(5,10,15,60,"Another Window");
+    wselect(w1);
+    wloc = w1->location;
+
+All functions that require a window number in earlier versions require
+a pointer to a window structure in Vitamin C Multi-user.
+
+Keys 
+
+In earlier versions of Vitamin C, the keys used by the input
+routines are redefinable, but standard keys are not.  With 
+Vitamin C Multi-user, all keys are redefinable.
+
+Vitamin C DOS/OS2
+    switch(getone())
+        {
+        case ESC:
+            say("esc hit");
+            break;
+        case BTAB:
+            say("back tab hit");
+            break;
+        }
+
+Vitamin C Multi-user
+    Could be done the same way but to be sure it would work with all
+    terminals:
+    
+    COUNT ans;
+    ans = getone();
+    if(ans == vckey.esc)
+        say("esc hit");
+    if( ans == vckey.btab);
+        say("back tab hit");
+
+For a more detailed discussion see the keyboard documenation.
+
+Functions that are not included:
+
+vced                vcedclose
+vcedload            vcedopen            
+vcedsave            
+
+Functions that are different:
+statlin             tblalloc            
+atsayget            
+
+Function with different names
+
+wtodisk -> wdotofil
+addvcmstyle -> addmstyle
+chgvcmstyle -> chgmstyle
+delvcmstyle -> delmstyle
+statwno -> statwdo
+
+
+Global variables that are different
+
+vckbfunc -> vctrap
+vcerrno -> vcerror
+cs_row -> vcrow
+cs_col -> vccol
+msgwno -> msgwdo
+vctimwno ->vctimwdo
+vctimrow -> vctimrow
+vctimcol -> vctimcol
+vctimattr -> vctimattr
+debugfunc -> vcdbfunc
+vcdgt -> dftgettbl
+vcdgcw -> dgetctrl
+VCCOL -> vcterm.cols
+VCROW -> vcterm.rows
+wcurrent -> wdoctrl->wcurrent
+wnoactive -> wdoctrl->wnoactive
+wno_opn -> wdoctrl->wno_opn
+wfreeze -> wdoctrl->wfreeze
+wstdctrl -> wdoctrl->wstdctrl
+VCVRAM -> vcvram
+VCSPRT -> vcsprt
+VC_VIO -> vctio
+wscreen -> wdoctrl->wscreen
+wbscreen -> wdoctrl->wbscreen
+vcmhook1 -> vcmhk1
+vcmhook2 -> vcmhk2
+vcmhook3 -> vcmhk3
+vcmhook4 -> vcmhk4
+vcmhook5 -> vcmhk5
+vcghook1 -> gethk1     /* might be different location */
+vcghook2 -> gethk2     /* might be different location */
+vcghook3 -> gethk3     /* might be different location */
+vcghook4 -> gethk4     /* might be different location */
+ 
+You may encounter other differences, especially if you rely on
+the internal workings of the code.  The file "compat.vc" in this
+directory may be used as a header file to help when porting from
+other versions of Vitamin C.
+

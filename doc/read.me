@@ -1,0 +1,702 @@
+Last minute updates, corrections and notes:
+-----------------------------------------------------------------
+GRAPHICS CHANGED
+Vitamin C Mulit-User sets the high bit of a character to specify 
+graphics.  This allows more attributes.  The following is a chart 
+of the attributes available and the termcap to use to specify this
+attributes. (**NOTE** !!!! Combination attributes are only used
+if the terminal REQUIRES!!!! combination attributes)
+
+   Internal                                            Termcap
+    Binary     Dec    Description                     On  Off #
+  =========    ===    =======================         =========
+  0000 0000      0    Invisible                       (Note 1)  
+  0000 0001      1    Underline                       us  ue  ug
+  0000 0111      7    Normal                          ----------
+  0000 1001      9    Lolite/Underline                a3  A3
+  0000 1111     15    Lolite/Normal                   it  ie  ig
+  0111 0000    112    Inverse                         so  se  sg
+  0111 0001    113    Inverse/Underline               a6  A6
+  0111 1000    120    Inverse/Lolite                  a7  A7
+  1000 0001    129    Blink/Underline                 a8  A8
+  1000 0111    135    Blink/Normal                    bo  be  bb
+  1000 1001    137    Blink/Underline/Lolite          b0  B0
+  1000 1111    143    Blink/Lolite/Normal             b1  B1
+  1111 0000    240    Blink/Inverse                   b2  B2
+  1111 0001    241    Blink/Inverse/Underline         b3  B3
+  1111 1000    248    Blink/Inverse/Lolite            b4  B4
+  1111 1001    249    Blink/Inverse/Lolite/Underline  b5  B5
+
+****************************************************************
+* COMBINATION CHARACTER ARE ONLY IF THE TERMINAL REQUIRES THEM *
+* ============================================================ *
+****************************************************************
+
+Note 1:
+    Invisible is done by software if an character has an invisible
+    attribute a space is send instead of the character.  But the 
+    space character can be redefined!
+    For example to make invisible characters show up as "#" 's
+
+    extern char vcinvchr;
+
+    main()
+        {
+        ..
+        ..
+        vcinvchr = '#';
+        ..
+        ..
+        } 
+    Presently invisible mode does not work in MSDOS.
+-----------------------------------------------------------------
+COLUMNS AND ROWS
+Vitamin C Mulit-User checks environment variables LINES, and COLUMNS 
+to override the setting of rows and columns in the termcap file.  
+This enables each user to change the terminal size.  (Also works 
+with xterm)
+-----------------------------------------------------------------
+NEW FUNCTION
+There is a new function to display datatypes this function uses
+the input data conversion to convert the data before displaying
+the information.  This function can display numeric date or any 
+custom datatype used.
+
+VOID atsaytyp(row,col,numptr,pic,type,attr)
+COUNT row,col;      /* Location to display field                    */
+TEXT *numptr;       /* Pointer to number to convert                 */
+TEXT *pic;          /* Pointer to picture to use for conversion     */
+COUNT type;         /* Type of pointer INTEGER / REAL / JULDATE ... */
+COUNT attr;         /* Attribute to use or -1 for default           */
+
+This function is the same at atsaynum() with a attribute added.
+-----------------------------------------------------------------
+NEW PRINT FUNCTIONS
+The print functions have been changed to streams so two more 
+functions were needed. 
+
+COUNT vcprtcls();   /* Close the printer file                       */
+COUNT vcprtfls();   /* Flush the printer stream                     */
+-----------------------------------------------------------------
+ANOTHER KEY ROUTINE
+The function ungetone() is a FIFO (First in First Out), vcpushkey()
+is a LIFO (Last in First Out) routine. Both work with the keyboard
+buffer and may be used together.
+-----------------------------------------------------------------
+NEW FEATURES DURING INPUT
+Two new features have been added to the input routines...
+Clear to the end of field, and Clear field.
+
+    "spkey.fld_blank"   :   Blanks a field
+    "spkey.fld_deof"    :   Clear to end of field
+
+The two keys will function only if you assign them a value.
+For example:
+
+    spkey.fld_blank = 5002;     /* F3 clears the field          */
+    spkey.fld_deof = 5003;      /* F4 clears to end of field    */
+-----------------------------------------------------------------
+PC F11 and F12 keys (DOS only)
+There is code written that allows the F11 and F12 key to be read
+this code has only be tested on Turbo C compiler and may not work
+on any other compiler.  To compile define NOREDIRECT and compile
+xgetone.c and keyrdy.c
+-----------------------------------------------------------------
+ADD STRUCTURE MEMBERS FOR GETITEMS
+The get item structure has been changed to include a extra char
+pointer (gptr).  This pointer is for the programmer's use and
+Vitamin C Mulit-User will not change remove or alter the pointer.
+Possible uses are up to the programmer.  Also there is a numeric
+variable (gid) also for the programmer.  It is designed to hold
+the id number of the field but it's use is left up to the
+programmer.  Another numeric value (gnbr) is in the structure for 
+the programmer which can be used by the programmer.
+-----------------------------------------------------------------
+SELECTIONS SETS CHANGED 
+Selection sets try to figure out which option is selected.
+If the option is not found the selbar does not appear but pressing
+the down arrow should cause the bar to appear. A compare of the
+items requires that the selection items and the input be exact
+(same size).
+-----------------------------------------------------------------
+HELP SYSTEM CHANGED
+The help system has been changed to allocate space for the
+help index, now the MAXHLP define is only used by helpgen() and
+buildhlp() while creating an index file.  Two hook functions
+have been added one is called before the help opens a window
+(PFI hlphk1) and the other is called after each key is pressed
+in the help system (PFI hlphk2). New global variables have been
+added to control the help window and the function sethwdo() has
+been added to change these function. Also the help keyword is
+limited to the first 11 characters(changed from 39).
+
+HOOK FUNCTIONS:
+
+    (*hlphk1)()           Help hook one is called as Vitamin C Mulit-User
+                          enters help.  The main use would be to change
+                          the location of the help window in relation
+                          to the current row and column (vcrow,vccol)
+                          If hlphk1 returns TRUE (not zero) help will
+                          be exited.
+
+    key = (*hlphk2)(key)  Help hook two is called when a key is pressed
+                          and passed the key pressed.  If you decided
+                          the key pressed should exit help then return
+                          spkey.xhkey (the exit help key).
+                          
+NEW FUNCTION:
+VOID sethwdo(topr,topc,botr,botc,title,ctrl,depth,width,color)
+COUNT topr,topc;    /* Top row and column for help window           */
+COUNT botr,botc;    /* Bottom row and column for help window        */
+TEXT *title;        /* Title for help Window                        */
+COUNT ctrl;         /* Control value for help window                */
+COUNT depth,width;  /* Depth and width of help window               */
+COUNT color;        /* Color scheme for help window                 */
+
+This function is similar to the Vitamin C function sethlpcfg but it 
+adds the parameter ctrl.
+-----------------------------------------------------------------
+NUMPRE() and NUMPOST() CHANGED
+The two low level numpre() and numpost() have been changed to
+convert only doubles.  Two new function intpre() and intpost()
+are now used to convert integers (these functions are used to
+convert a integer or double to string for editing then converting
+the edited value back to integer or double).
+-----------------------------------------------------------------
+OUT OF HEAP SPACE:
+On XENIX systems if you get an out of heap error you can
+correct it by the -LARGE option on machines that have a
+large model.  For example   "cc -LARGE test.c"
+-----------------------------------------------------------------
+FUNCTION KEYS NOT WORKING ON SLOW TERMINALS:
+There have been four new entries available in the termcap file
+to control the speed of the keyboard they are:
+
+     zc - Minimum number of characters (VMIN)
+     zt - Timeout value (VTIME)
+
+These two termcap entries replace the dT entry described in the
+manual.  For a further explanation of these functions check 
+with your Unix manuals under the ioctrl function.
+
+IMPORTANT !!!!!
+If you are compiled with TTY defined (not IOCTL) these entries
+will do nothing.  You can check in your UNIX manual and compare
+the way set_raw() function in unix.c file address ioctrl in
+respect to VMIN and VMAX are used.  If your system can use
+ioctrl it is recommended.
+
+IF STILL NOT WORKING
+If the termcap entry "zd" is set to a positive number Vitamin C 
+Mulit-User will send the value to the vcnap() function before 
+each keyrdy() check.  By adjusting this delay you should be
+able to detect if a key is ready on a slow terminal or network.
+The proper use of this function requires the vcnap function to
+sleep() in 1/10 of second intervals.  Coding vcnap() to sleep
+in intervals less than a second varies on different systems. If
+you are unable to sleep for less than a second you can loop.
+(looping wastes cpu time and slows down performance of computer 
+and is not recommended!  NOTE: the next procedure is recommended
+over looping).
+
+IF ALL ELSE FAILS
+Set the new termcap entry zk "zk#1" (see other note) this should
+allow any function keys to work but with side affects.  If you
+are using this entry call Creative Programming (214)416-6447 and 
+discuss your system.
+
+FOR VMS:
+In VMS the zc is used to select number of characters on each 
+read.  The zt is the number of keyrdy retries before deciding
+a key is not ready.  This system seems to work real well and
+may be adopted for the entire system.
+-----------------------------------------------------------------
+IF LD CAN NOT FIND A FUNCTION:
+If rdchk or nap functions are used you must compile with the 
+x library "-lx"
+-----------------------------------------------------------------
+STATUS LINE WRONG COLOR OR WRONG LOCATION:
+In the manual statlin looks like this statlin(wptr,row,col)
+should be statlin(wptr,row,col,attr).
+-----------------------------------------------------------------
+WHERE IS WTODISK:
+wtodisk has been rename to wdotofil
+-----------------------------------------------------------------
+WHERE IS SETKEYFUNC:
+setkeyfunc has been renamed to setkeytrap
+-----------------------------------------------------------------
+HELP AND WINDOW ADJUST IS NOT WORKING:
+As Vitamin C Mulit-User comes configured there is no keyboard trap
+function therefore help and window adjust will not work unless
+you install a keyboard trap function.  There are two provided
+vctrap (standard) and vcprokey (definable) plus you can write 
+your own.  For help and window adjust to work just add the
+lines:
+        COUNT vctrap()
+        setkeytrap(vctrap);
+
+  Note: the reason this is not part of vcstart is so wadjust is
+        not included in every file unless you need this function.
+-----------------------------------------------------------------
+WHY DOES SHIFT-F2 PRODUCE BACK-TAB OR NO SHIFT-F2:
+On an PC running XENIX the SHIFT-F2 key produces the same value
+as the BACK-TAB a small program is included with the utilities to 
+correct this problem.  It should be compiled and executed during 
+login.
+-----------------------------------------------------------------
+PRINTF DOESN'T SEEM TO WORK CORRECTLY
+Because of the way Vitamin C Mulit-User writes to the terminal it 
+blocks, stops, or delays printf's.  Therefore when printf is needed
+use sprintf to print to a buffer then Vitamin C Mulit-User to send
+the buffer to the screen.
+-----------------------------------------------------------------
+EVENT LOOP
+Vitamin C Mulit-User does have a event loop called PFI syskeytrap.  
+This is used to refresh the screen print the screen and check for 
+blocked keys. This function can be removed or modified by the 
+programmer.
+-----------------------------------------------------------------
+IF THERE IS TROUBLE
+Before you call Creative Programming:
+  If Compile Problems
+    {
+    check read/write permissions and owners
+    check defines
+    if still problem
+      (*CALL)(214-416-6447)
+    }
+  else
+    {
+    if locks up
+      (*CALL)(214-416-6447)
+    else
+      {
+      /*    Core Dump:       */
+      correct terminal (see below)
+      adb {execute_file_name}
+      $c {return}
+      (*CALL)(214-416-6447)
+      }
+    }
+-----------------------------------------------------------------
+PROGRAM ENDED AND TERMINAL NOT RESPONDING TO RETURN AND NO ECHO
+This means the program ended without calling vcend and resetting
+the correct terminal setting. To restore the terminal:
+  Type the following line (^J == control J) - 
+    ^J^J^Jstty sane^J
+-----------------------------------------------------------------
+TERMCAP, TERMINFO, AND SMALLER CODE 
+There are several new ways to start Vitamin C Mulit-User not
+mentioned in the manual.  All of these function include different 
+functions and change the size of the final product.  The compiled 
+function vccsmall should produce the smallest code and fastest 
+startup.  The program mkvcc compiles the /etc/termcap.vc file to 
+a termcap.vcc in the default directory.  This file should be named
+termcap.vcc and moved to the /etc directory or vccstart and 
+vccsmall will not work. 
+
+Uses file /etc/termcap.vc
+    vcstart  - Standard Vitamin C Mulit-User start all available datatypes
+               plus fancy window opens and uses the Vitamin C Mulit-User
+               termcap routines to read the file /etc/termcap.vc
+    vcsmall  - Just like vcstart except only string datatypes on gets
+               and just one way to open the window (this loss of ability
+               is transparent to the code).
+
+Uses file /etc/termcap.vcc
+    vccstart - Compiled full start.  Uses the compiled termcap file
+               /etc/termcap.vcc.  The compiled termcap file is produced
+               by mkvcc program.
+    vccsmall - Compiled small start.
+
+Uses file /termcap
+    tstart   - Use system termcap commands instead of Vitamin C Mulit-User's
+               provides maximum portability but some screen functions
+               might be unreliable.  Must compile these programs with
+               the option -ltermcap.
+    tsmall   - Use system termcap small start.
+
+Uses files /usr/lib/termcap/*
+  TO BE ADDED:
+    tistart  - Use terminfo structure for compatibility. Plus full code
+    tismall  - Small terminfo start
+-----------------------------------------------------------------
+NEW DATATYPES
+The code has been written to except 16 datatypes plans are to provide
+examples for the first 10 datatype leaving the last 6 as custom types.
+The approach used is an array of pointers to functions.  This will 
+allow the programmer to customize an application allowing only the 
+datatypes used by the application loaded into the code. This allows 
+maximum power yet retains smaller code size for program not requiring 
+all datatypes.  At the time of this writing only datatypes provided are:
+
+Now the list of datatypes include:
+
+    STRING     -  Standard C string     
+    INTEGER    -  integer      
+    REAL       -  double
+    JULDATE    -  julian date stored in a long
+    LONG_DATA  -  long 
+    SHORT_DATA -  short integer
+    FLOAT_DATA -  float
+
+Since the exact number and types of the standard datatypes are still 
+under discussion get you comments in early.
+-----------------------------------------------------------------
+LOOP FUNCTIONS
+In Vitamin C Mulit-User the loop function uses alarm to call the loop
+function every second. If you are using the alarm signal this might
+interfere with your code. (It is written to restore previously
+set alarm functions and time)
+-----------------------------------------------------------------
+NEW LIBRARY NAMES
+The batch files that compile the librarys under UNIX now name the
+files so the library option can be used on the command line the
+new names are:
+       Llibvc.a - Large library
+       Mlibvc.a - Medium library
+       Slibvc.a - Small library
+If you move the libraries to the directory /usr/lib (on some systems
+this must be /lib) then you can compile with the following command
+and the compiler will pick the correct memory model.
+       cc -Mm vcdemo.c -lvc -o vcdemo   
+          {this is for medium model}
+-----------------------------------------------------------------
+MAXIMUM PORTABILITY
+Because of the way some terminal display special attributes it is
+best not to display anything on the first column with any attribute
+other than normal. (Column 0) But if it is in a bordered window you
+can display on 0,0 and Vitamin C Mulit-User will remove the border
+if necessary.  Or if in a borderless window with any starting column 
+other than 0 you can display anywhere without any problems.
+-----------------------------------------------------------------
+CURSOR ON AND OFF
+In the manual it say that the termcap entry ca is used to turn on
+the alternate cursor, this has been changed.  The termcap entries
+    vs - turns on the alternate cursor
+    ve - turns on the normal cursor
+The sequence for turning on and off the cursor include:
+  Cursor ON:
+    CO - turn on the cursor
+    if normal then send
+        ve - turn on normal cursor
+    else
+        vs - turn on alternate cursor
+  Cursor OFF
+    CF - turn off the cursor
+Also you will find the cursor is addressed to the bottom right
+of the screen this is for terminals that cannot turn the cursor
+on or off
+
+On PC XENIX consoles different values turn the cursor on and off
+if the cursor appears on the bottom right then the termcap is not
+properly set to turn the cursor off (on some cards the command to
+turn the cursor off does not always work).
+-----------------------------------------------------------------
+REFRESHING GETTABLES
+If in a validation function you wish to refresh a gettable two
+functions have been written to accomplish this.
+
+   afld2tmp(gt,flag)    - this refreshes all variables
+   GETTABLE *gt;          and if flag is TRUE redraws on the screen
+   COUNT flag;
+   
+   fld2tmp(gi,flag)     - this refreshes one variable and if flag
+   GETITEM *gi;           is TRUE redraws the variable
+   COUNT flag;
+
+In the following functions by refresh we mean copying and translating
+from the original location of the variable to the temporary location
+that Vitamin C Mulit-User is using for editing the variables 
+(Vitamin C Mulit-User copies all variable for editing and puts them 
+back to the original location if the readgets is not exited with 
+abort).  See rdgettbl.c under demos for example.
+-----------------------------------------------------------------
+VALIDATION FOR READGETS HAS BEEN CHANGED
+The change was made so validation function could tell if the user
+has hit abort or done and is about to exit the read.  
+
+Example of a validation function sensing abort or done:
+
+valpart(fld,gt)    /* validate a part number  */
+TEXT *fld;
+GETTABLE *gt;
+    {
+    if(gt->tkeypress == spkey.abort)
+        {
+        /* user is aborting screen   */
+        /* the only way to stop the  */
+        /* user from exiting is if   */
+        /* you change the value of   */
+        /* gt->tkeypress             */
+        }
+    if(gt->tkeypress == spkey.done)
+        {
+        /* user is done with screen */
+        /* validate any other field */
+        /* required and return GOOD */
+        /* if you want him to leave */
+        return(GOOD);
+        }
+    /* validate part number         */
+    }
+-----------------------------------------------------------------
+NEW TERMCAP ENTRY
+A new termcap entry has been added to return the terminal to a 
+desired state upon exiting a Vitamin C Mulit-User program.  An 
+example is if the terminal is setup in a specific mode when 
+entering the program (thru the "is" termcap entry). The mode can 
+be returned when leaving the terminal "es"
+-----------------------------------------------------------------
+EDIT FROM ORIGINAL LOCATION
+Vitamin C Mulit-User makes a copy of all variable for editing.
+This is necessary for the numeric ones and the datatypes that need
+conversion but not for string variables.  If you wish to edit
+strings in there original location and not copy them a datatype
+is written to do this.  Here is an example:
+
+
+To make the standard string edit original location:
+    
+    COUNT oldpre();
+    .
+    .
+    vcstart...
+    datapre[0] = oldpre;
+    datapost[0] = NULLFUNC;  /* Post function not necessary */
+    .
+    .
+    .
+-----------------------------------------------------------------
+GETS: PRE and POST FUNCTIONS:
+The pre and post function arguments have been changed to match 
+the validation function.  They now are:
+    
+    prefunc(fld,table)
+    TEXT *fld;        /* Pointer to current field              */
+    GETTABLE *gt;     /* Pointer to gettable                   */
+
+    postfunc(fld,table)
+    TEXT *fld;        /* Pointer to current field              */
+    GETTABLE *gt;     /* Pointer to gettable                   */
+-----------------------------------------------------------------
+TERMINALS WHERE ATTRIBUTES REQUIRE A SPACE ON SCREEN
+Every effort has been made to insure that Vitamin C Mulit-User
+runs on terminals where attributes require a space.  For the most 
+insurance only the high level function should be used.  If there
+are any problems please call tech support.
+-----------------------------------------------------------------
+MENU TOGGLE POINTERS
+Menu toggle pointers are now configurable by the termcap entries
+"go" and "GO".  This is the character printed on the screen when
+an entry is toggled.  The default character is the ">".
+-----------------------------------------------------------------
+NEW WINDOW COLORS
+All of the default window colors have been changed.  Because solid
+color windows require more character sent to the screen, they have
+not been used.  You can change the default colors in the file
+vcglobal.c.
+-----------------------------------------------------------------
+NOT FINDING STRUCTURE DEFINITION
+Vitamin C Mulit-User structures and global variables have been 
+separated so during compiling only the necessary structures are 
+read.  The choices for structures are:
+
+    VCGET_DEFS        -    Get defines
+    SEL_DEFS          -    Selection set information
+    VCM_DEFS          -    Menu defines
+    VCERROR_DEFS      -    Errors defines
+    VCKEY_DEFS        -    Key defines
+    VCPRO_DEFS        -    ProKey defines
+    VCLINT            -    Lint defines
+
+The information need to compile the program should be defined 
+before the call to vcstdio.h.  For example:
+
+#define VCGET_DEFS
+#define VCKEY_DEFS
+#include <vc/vcstdio.h>
+-----------------------------------------------------------------
+PRINT FUNCTIONS NOT WORKING
+In UNIX before the print functions will work a call to vcprtopn
+must be made with the name of the printer.  The format of the 
+vcprtopn call is:
+ 
+    vcprtopn(printer)
+    TEXT *printer;          pointer to string containing name of
+                            printer device or NULL = "/dev/vcprt"
+
+vcprtopn returns the handle of the previous printer device used.
+-----------------------------------------------------------------
+NEW ENVIRONMENT VARIABLES
+The environment variable have been changed.  The new variables are:
+
+    VCTERMCAP -  location of termcap file for programs started
+                 with either vcsmall() or vcstart()
+    VCCTERMCAP - location of compiled termcap file for programs
+                 started with either vccsmall() or vccstart()
+-----------------------------------------------------------------
+NEW FUNCTION FOR USING SELECTION SETS FOR VALIDATION
+The function checkset() has been added to validate an entry using
+the choices in a selection set. 
+-----------------------------------------------------------------
+TOGGLE SELECTION SETS ON AND OFF
+Selection sets can now be toggled on and off. Also a control byte
+is available to prevent a selection set from executing (this is 
+so a selection set can be used for validation only, see previous
+note).  The SETONLY control byte will force a selection set on
+and can not be toggled off.  If there is a selection set the 
+operator can toggle between the selection set and input with the
+spkey.fld_mode key (default value is F11 defined in vckeyset())
+-----------------------------------------------------------------
+USER DEFINABLE INPUT FUNCTIONS
+The input function are user definable the only ones presently 
+defined are ltorinp (left to right input) and rtolinp (right to
+left input).  More input routine will be added and you can 
+add your own without code modification.  Examples and 
+documentation in the works.
+-----------------------------------------------------------------
+LINT ERRORS AND COMPILE ERRORS
+All know compiler (not lint) warnings have been removed, if the 
+code produces any warnings or errors while compiling please note 
+the errors and the corrections to remove the errors or warnings 
+(if possible) and report back to Creative Programming so future 
+releases can correct these errors.
+-----------------------------------------------------------------
+GETSAY PARAMETER CHANGED
+The parameters to getsay have been changed:
+
+           Old                    New
+        getsay(gi,idx)          getsay(gi)
+        GETITEM *gi;            GETITEM *gi;
+        COUNT idx;
+-----------------------------------------------------------------
+NEW FUNCTION
+A new function has been added to validate a get table this function
+is called valtable().  Valtable returns a pointer to the get node
+of the invalid node or NULL if all items are correct.  This function
+is used in the new VALALLTBL option for xreadgets() (see next note).
+
+        GETITEM *valtable(table)
+        GETTABLE *table;
+
+-----------------------------------------------------------------
+NEW OPTIONS FOR GETTABLES (atget()....readget())
+There are new options for GETTABLES these must be set when calling
+tblalloc or change the default variable (dtblctrl)
+The new options are:
+
+        QDISPLAY    -  Has been improved for even faster displays
+        VALALLTBL   -  The whole gettable must be valid before
+                       xreadgets will allow an exit
+        TBLRETPG    -  When page down or page up is entered exit
+        TBLRETUP    -  When field up or field down is entered exit
+        MKCIRCLE    -  When field next is press on the last field
+                       go to first field
+        MKEXIT      -  Exit when next field is pressed on the last
+                       field or previous field is pressed on the 
+                       first field
+        NORETEXIT   -  Return on the last field does not cause
+                       the read to terminate. (unless MKEXIT
+                       is also specified)
+-----------------------------------------------------------------
+NEW MAKEFILE
+A new makefile has been added to /usr/vc/source directory. Products
+based on Version V should be able to use the makefile.  The makefile
+will create the libraries in the /usr/vc/source directory and also
+look there for updates.  The makefile can be used to create the 
+whole library or update only changes.  The makefile is slower than
+the script file for creating the complete library.  To use the
+makefile change directory to /usr/vc/source and enter:
+
+     make small         - Makes or updates the small library
+     make medium        - Makes or updates the medium library
+     make large         - Makes or updates the large library
+     make all           - Makes or updates all libraries 
+     (this could take longer than 8 hours)
+
+NOTE. For the makefile to work your system must be able to 
+      make a library with just the ranlib command and not
+      the "ar cr {lib} 'lorder *.o | tsort'" commands.  If your 
+      system must use the lorder command then the script files
+      (compile.s, compile.m and compile.l) must be used to 
+      compile your code. 
+
+After compiling the libraries they should be moved to /usr/lib
+(or /lib depending on your system) so the compiler can find them 
+with the "-lvc" argument.
+-----------------------------------------------------------------
+VT100 IN TERMCAP.VC
+Termcap.vc ("/etc/termcap.vc") now includes an entry for VT100.
+The entry was tested using terminal emulation programs on an
+PC and is not perfect (because the emulations where not perfect
+and a manual not available).  But it does seem to work on
+various communication programs.  
+-----------------------------------------------------------------
+TESTED AND PROPERLY CONFIGURED TERMCAP ENTRIES
+If you have a properly configured termcap.vc entry and would like
+to have it included in future releases please send us a copy. The
+best entries will be kept and included in future termcap.vc's.
+Give use a call and we will give you a uucp number or we might even
+call you.
+-----------------------------------------------------------------
+USING WINDOWS
+In it's present form, Vitamin C Mulit-User can be used with or
+without windows.  Plans are to change this requiring the use of
+windows.  If you are writing an new application the best bet for 
+future compatibility is to open a window for all output to the 
+screen.
+-----------------------------------------------------------------
+IF YOU ARE USING CTREE BY FAIRCOM !!!!!!!
+Ctree uses a global variable spkey for temporary global storage.
+This conflicts with the spkey structure used by Vitamin C Mulit-User.
+To correct this problem compile ctree and include the vc_ctree.h
+file.  This will change the name of spkey to cpkey and solve the
+problem.  Also when compiling with both ctree and Vitamin C Mulit-User
+include files you need to comment out the typedefs used by both.
+Our suggestion is to change the include file ctport.h to read
+as follows:
+
+#include <vc_ctree.h>
+
+  <Delete the following rows and make any changes in vc_ctree.h>
+  **************************************************************
+
+#define    FAST	register        /* register variable   */
+#define    PFAST	register        /* register parameter  */
+#define    EXTERN	extern          /* External variable   */
+#define    GLOBAL	/* */           /* Global variable	   */
+#define    LOCAL	static          /* Local to module	   */
+
+typedef short          COUNT;
+typedef unsigned int   UCOUNT; 
+typedef char           TEXT,BYTE;
+typedef int            WORD,VOID,BOOL;
+typedef long           LONG;
+typedef unsigned long  ULONG;
+typedef unsigned char  UTEXT;
+
+typedef unsigned int   VRLEN;
+typedef int            RNDFILE;
+typedef long           POINTER,NODEPTR;
+typedef long           DATET;
+typedef char          *TEXTPTR;
+
+                <End of lines to delete>
+                ************************
+
+This will compile with Vitamin C Mulit-User and also allow ctree 
+to compile.
+-----------------------------------------------------------------
+INCLUDE FILES HAVE CHANGED !!!
+The way Vitamin C Mulit-User address include files has changed
+from
+#include <vc/vcstdio.h>
+to 
+#include <vcstdio.h>
+This will make Vitamin C Mulit-User compatible with more operating 
+systems but you now need to define where the include files are 
+located if not in the default include directories
+cc -I/usr/vc/include         -   to make the compiler search vc 
+                                 include directories
+-----------------------------------------------------------------

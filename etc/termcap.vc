@@ -1,0 +1,593 @@
+#
+#
+#   Vitamin C Multi-User version 1.1
+#   Copyright (c) 1985-1990
+#   Creative Programming Consultants, Inc.
+#   P.O. Box 112097
+#   Carrollton, Texas  75006
+#   (214) 416-6447
+#   ALL RIGHTS RESERVED
+#   Last Modification: .2 on 9/1/90 at 00:14:32
+#
+#
+#   Vitamin C Multi-user Sample Termcap File
+#    
+#   The following are some sample termcap entries.  All the entries
+#   are not complete but most have been tested to work.  For 
+#   Vitamin C Multi-user to work to it's full potential the termcap
+#   entries need to be complete!  Please refer to the installation
+#   section of the manual and always read the read.me file under
+#   doc directory for any new changes in the termcap.vc file
+#
+#   The customer may copy this termcap file to any evironment or
+#   with any application. 
+#
+#   Comments Can now be added to the termcap.vc file by
+#   starting the line in column 0 with an "#" or by inserting
+#   a "#" after the end of the line (i.e. after the ":\" or the
+#   last ":")
+#
+
+vctest|Vitamin C Test Terminal:\
+	:co#80:\                        # Number of columns
+	:li#24:\                        # Number of rows
+	:cl=\E[2J\E[H:\                 # Clear Screen Command
+	:cm=\E[%i%d;%dH:                # Cursor Addressing
+vt220|Digital VT220 in Vt100 compatability mode:\
+	:vc=vt100:
+vt100|Digital VT100:\
+	:am:bs:cd=\E[J:ce=\E[K:cl=\E[2J\E[H:cm=\E[%i%d;%dH:co#80:\
+	:bt=\E[Z:ik=\E[@:li#24:ic=\E[@:\
+	:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:up=\E[A:\
+	:zt#99:zc#6:ms:\
+	:ku=\E[A:08=Up Arrow:\
+	:kd=\E[B:09=Down Arrow:\
+	:kl=\E[D:06=Left Arrow:\
+	:kr=\E[C:07=Right Arrow:\
+	:k0=\EOP:l0=PF1:k1=\EOQ:l1=PF2:\
+	:k2=\EOR:l2=PF3:k3=\EOS:l3=PF3:\
+        :ki=\E[L:kk=\x7f:ek=\E[E:\
+	:GS=\E(0:GE=\E(B:\
+	:GV=x:gv=x:GH=q:gh=q:G2=l:g2=l:G1=k:g1=k:\
+	:G3=m:g3=m:G4=j:g4=j:GL=t:gl=t:GR=u:gr=u:\
+	:GU=v:gu=v:GD=w:gd=w:GC=n:gc=n:GA=`:ga=~:\
+	:GB=`:gb=~:GF=`:gf=~:GI=`:gi=~:GJ=`:gj=~:\
+	:GK=`:gk=~:GM=`:gm=~:GN=`:gn=~:GO=>:go=>:\
+	:GP=`:gl=~:\
+        :00=ESC:01=BKSP:02=Return:03=Ctrl-B:04=Tab:\
+	:EN=^X:11=Ctrl-X:\
+	:19=Return:\
+	:k0=\EOP:l0=PF1:k1=\EOQ:l1=PF2:k2=\EOR:l2=PF3:k3=\EOS:l3=PF4:
+#
+#   Wyse 85 from Optifacts with dots for the second border
+#   Completeness unknow
+#
+wy85|Wyse 85:\ 
+	:is=\E[61"p:\
+	:am:bs:cd=\E[J:ce=\E[K:cl=\E[2J\E[H:cm=\E[%i%d;%dH:co#80:\
+	:bt=\E[Z:ik=\E[@:li#24:CO=\E[?25h:CF=\E[?25l:\
+	:ca=\E[=6;12C:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:up=\E[A:\
+	:zt#2:zc#6:ms:\
+	:ku=\E[A:08=Up Arrow:\
+	:kd=\E[B:09=Down Arrow:\
+	:kl=\E[D:06=Left Arrow:\
+	:kr=\E[C:07=Right Arrow:\
+	:k0=\EOP:l0=PF1:k1=\EOQ:l1=PF2:\
+	:k2=\EOR:l2=PF3:k3=\EOS:l3=PF3:\
+        :ki=\E[L:kk=\x7f:ek=\E[E:\
+	:GS=\E(0:GE=\E(B:\
+	:GV=x:gv=~:GH=q:gh=~:G2=l:g2=~:G1=k:g1=~:\
+	:G3=m:g3=~:G4=j:g4=~:GL=u:gl=~:GR=t:gr=~:\
+	:GU=v:gu=~:GD=w:gd=~:GC=n:gc=~:GA=`:ga=~:\
+	:GB=`:gb=~:GF=`:gf=~:GI=`:gi=~:GJ=`:gj=~:\
+	:GK=`:gk=~:GM=`:gm=~:GN=`:gn=~:GO=`:go=~:\
+	:GP=`:gl=~:\
+        :00=ESC:01=BKSP:02=Return:03=Ctrl-B:04=Tab:\
+	:EN=^X:11=Ctrl-X:\
+	:19=Return:\
+	:k0=\EOP:l0=PF1:k1=\EOQ:l1=PF2:k2=\EOR:l2=PF3:k3=\EOS:l3=PF4:
+#
+#   The IBM ansi description should be complete and work on the
+#   console of PC XENIX.  For color "setenv TERM lc"
+#
+li|ansi|IBM Ansi crt with 10 function Keys:\
+	:am:bs:cd=\E[J:ce=\E[K:cl=\E[2J\E[H:cm=\E[%i%d;%dH:co#80:\
+	:bt=\E[Z:ik=\E[@:li#25:CF=\E[=14;14C:zt#2:zc#99:ms:ic=\E[@:\
+	:vs=\E[=6;12C:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:up=\E[A:\
+        :ve=\E[=0;12C:bo=\E[5m:be=\E[m:it=\E[1m:ie=\E[m:\
+	:ku=\E[A:kd=\E[B:kl=\E[D:kr=\E[C:\
+        :ki=\E[L:kk=\x7f:ek=\E[E:\
+	:kh=\E[H:EN=\E[F:PU=\E[I:PD=\E[G:\
+	:GV=\xba:GH=\xcd:go=\xaf:GO=\xaf:\
+	:G1=\xbb:G2=\xc9:G3=\xc8:G4=\xbc:\
+	:GU=\xca:GD=\xcb:GC=\xce:GL=\xcc:GR=\xb9:\
+        :gv=\xb3:gh=\xc4:kz=\E:\
+        :g1=\xbf:g2=\xda:g3=\xc0:g4=\xd9:\
+        :gu=\xc1:gd=\xc2:gc=\xc5:gl=\xc3:gr=\xb4:\
+        :00=ESC:01=BKSP:02=Ret:03=Ctrl-B:04=Tab:05=Btab:\
+        :06=Cursor Left:07=Cursor Right:08=Cursor Up:09=Cursor Down:\
+        :10=Home:11=End:12=PGUP:13=PGDN:14=Insert:15=Delete:\
+        :16=Ctrl-N:17=Ctrl-Y:19=Nbr-5:20=Ctrl-O:21=Ctrl-P:\
+        :k0=\E[M:l0=F1:k1=\E[N:l1=F2:\
+        :k2=\E[O:l2=F3:k3=\E[P:l3=F4:\
+        :k4=\E[Q:l4=F5:k5=\E[R:l5=F6:\
+        :k6=\E[S:l6=F7:k7=\E[T:l7=F8:\
+        :k8=\E[U:l8=F9:k9=\E[V:l9=F10:\
+        :m0=\E[Y:M0=sF1:m1=^A[Z:M1=sF2:\
+        :m2=\E[a:M2=sF3:m3=\E[b:M3=sF4:\
+        :m4=\E[c:M4=sF5:m5=\E[d:M5=sF6:\
+        :m6=\E[e:M6=sF7:m7=\E[f:M7=sF8:\
+        :m8=\E[g:M8=sF9:m9=\E[h:M9=sF10:\
+        :n0=\E[k:N0=cF1:n1=\E[l:N1=cF2:\
+        :n2=\E[m:N2=cF3:n3=\E[n:N3=cF4:\
+        :n4=\E[o:N4=cF5:n5=\E[p:N5=cF6:\
+        :n6=\E[q:N6=cF7:n7=\E[r:N7=cF8:\
+        :n8=\E[s:N8=cF9:n9=\E[t:N9=cF10:\
+        :o0=\E[w:O0=csF1:o1=\E[x:O1=csF2:\
+        :o2=\E[y:O2=csF3:o3=\E[z:O3=csF4:\
+        :o4=\E[\x40:O4=csF5:o5=\E[[:O5=csF6:\
+        :o6=\E[\x5c:O6=csF7:o7=\E[]:O7=csF8:\
+        :o8=\E[\x5e:O8=csF9:o9=\E[\x5f:O9=csF10:\
+        :p0=\E[W:P0=F11:p1=\E[X:P1=F12:\
+        :p2=\E[i:P2=sF11:p3=\E[j:P3=sF12:\
+        :p4=\E[u:P4=cF11:p5=\E[v:P5=cF12:\
+        :p6=\E[\x60:P6=csF11:p7=\E[\x7b:P7=csF12:
+lc|ansic|ansi color| IBM Ansi Color crt:\
+        :ct=\E[3%dm\E[4%dm:CF=\E[=8;8C:is=\E[m:\
+	:vs=\E[=4;7C:ve=\E[=0;7C:es=\E[33m\E[1m:\
+        :vc=ansi:
+lb|ansibbs|ansi bbs|IBM Ansi BBS:\
+        :CF=:is=\E[m:vs=:ve=:\
+        :vc=ansi:
+lb|ansicbbs|ansi bbs color| IBM Ansi Color BBS:\
+        :ct=\E[3%dm\E[4%dm:CF=:is=\E[m:\
+	:vs=:ve=:es=\E[33m\E[1m:\
+        :vc=ansi:
+#
+#   The following are for running Vitamin C Multi-user under DOS
+#   the default terminal is ibmpc (Black and White).
+#   for color "SET TERM=ibmcpc"
+#
+ib|ibmpc|os2pc|IBM PC/AT:\
+	:am:bs:cd=\E[J:ce=\E[K:cl=\E[2J\E[H:cm=\E[%i%d;%dH:co#80:\
+	:li#25:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:\
+        :bo=\E[5m:be=\E[m:it=\E[1m:ie=\E[m:ic=\E[@:\
+	:kb=^h:bt=\xff\x0f:ta=^i:ms:\
+        :ku=\xffH|\xe0\x48:kd=\xffP|\xe0\x50:\
+        :kl=\xffK|\xe0\x4b:kr=\xffM|\xe0\x4d:\
+        :kh=\xff\x47|\xe0\x47:EN=\xff\x4f|\xe0\x4f:\
+        :PU=\xff\x49|\xe0\x49:PD=\xff\x51|\xe0\x51:\
+        :ki=\xff\x52|\xe0\x52:kk=\xff\x53|\xe0\x53:\
+        :k0=\xff;:l0=F1:k1=\xff<:l1=F2:\
+        :k2=\xff=:l2=F3:k3=\xff>:l3=F4:\
+        :k4=\xff?:l4=F5:k5=\xff@:l5=F6:\
+        :k6=\xffA:l6=F7:k7=\xffB:l7=F8:\
+        :k8=\xffC:l8=F9:k9=\xffD:l9=F10:\
+        :m0=\xffT:M0=sF1:m1=\xffU:M1=sF2:\
+        :m2=\xffV:M2=sF3:m3=\xffW:M3=sF4:\
+        :m4=\xffX:M4=sF5:m5=\xffY:M5=sF6:\
+        :m6=\xffZ:M6=sF7:m7=\xff[:M7=sF8:\
+        :m8=\xff\\:M8=sF9:m9=\xff]:M9=sF10:\
+        :n0=\xff\x5e:N0=csF1:n1=\xff\x5f:N1=csF2:\
+        :n2=\xff\x60:N2=csF3:n3=\xff\x61:N3=csF4:\
+        :n4=\xff\x62:N4=csF5:n5=\xff\x63:N5=csF6:\
+        :n6=\xff\x64:N6=csF7:n7=\xff\x65:N7=csF8:\
+        :n8=\xff\x66:N8=csF9:n9=\xff\x67:N9=csF10:\
+        :o0=\xff\x68:O0=acF1:o1=\xff\x69:O1=acF2:\
+        :o2=\xff\x6a:O2=acF3:o3=\xff\x6b:O3=acF4:\
+        :o4=\xff\x6c:O4=acF5:o5=\xff\x6d:O5=acF6:\
+        :o6=\xff\x6e:O6=acF7:o7=\xff\x6f:O7=acF8:\
+        :o8=\xff\x70:O8=acF9:o9=\xff\x71:O9=acF10:\
+        :p0=\xff\x72:P0=ctlps:p1=\xff\x75:P1=ctlend:\
+        :p2=\xff\x76:P2=ctlpgdn:p3=\xff\x77:P3=ctlhm:\
+        :p4=\xff\x84:P4=ctlpgup:p5=\xff\xaa:P5=altesc:\
+        :p6=\xff\x1e:P6=alt_a:p7=\xff\x30:P7=alt_b:\
+        :p8=\xff\x2e:P8=alt_c:p9=\xff\x20:P9=alt_d:\
+        :q0=\xff\x12:Q0=alt_e:q1=\xff\x21:Q1=alt_f:\
+        :q2=\xff\x22:Q2=alt_g:q3=\xff\x23:Q3=alt_h:\
+        :q4=\xff\x17:Q4=alt_i:q5=\xff\x24:Q5=alt_j:\
+        :q6=\xff\x25:Q6=alt_k:q7=\xff\x26:Q7=alt_l:\
+        :q8=\xff\x32:Q8=alt_m:q9=\xff\x31:Q9=alt_n:\
+        :r0=\xff\x18:R0=alt_o:r1=\xff\x19:R1=alt_p:\
+        :r2=\xff\x10:R2=alt_q:r3=\xff\x13:R3=alt_r:\
+        :r4=\xff\x1f:R4=alt_s:r5=\xff\x14:R5=alt_t:\
+        :r6=\xff\x16:R6=alt_u:r7=\xff\x2f:R7=alt_v:\
+        :r8=\xff\x11:R8=alt_w:r9=\xff\x2d:R9=alt_x:\
+        :s0=\xff\x15:S0=alt_y:s1=\xff\x2c:S1=alt_z:\
+        :s2=\xff\x81:S2=alt_0:s3=\xff\x78:S3=alt_1:\
+        :s4=\xff\x79:S4=alt_2:s5=\xff\x7a:S5=alt_3:\
+        :s6=\xff\x7b:S6=alt_4:s7=\xff\x7c:S7=alt_5:\
+        :s8=\xff\x7d:S8=alt_6:s9=\xff\x7e:S9=alt_7:\
+        :t0=\xff\x7f:T0=alt_8:t1=\xff\x80:T1=alt_9:\
+        :t2=\xff\x81:T2=a_mis:t3=\xff\x82:T3=a_eq:\
+        :t4=\xff\x73:T4=c_lf :t5=\xff\x74:T5=c_rt :\
+        :t6=\xff\x95:T6=ctl_0:t7=\xff\x8d:T7=ctl_1:\
+        :t8=\xff\x8e:T8=ctl_2:t9=\xff\x8f:T9=ctl_3:\
+        :u0=\xff\x90:U0=ctl_4:u1=\xff\x91:U1=ctl_5:\
+        :u2=\xff\x7d:U2=ctl_6:u3=\xff\x92:U3=ctl_7:\
+        :u4=\xff\x93:U4=ctl_8:u5=\xff\x94:U5=ctl_9:\
+        :u6=\xff\xae:U6=a_hm :u7=\xff\xaf:U7=a_up :\
+        :u8=\xff\xb8:U8=a_pgdn:u9=\xff\x9c:U9=ctl.:\
+        :v0=\xff\xb2:V0=a_lf :v1=\xff\xb3:V1=a_5  :\
+        :v2=\xff\xb4:V2=a_rt :v3=\xff\xb5:V3=a_pl :\
+        :v4=\xff\xb6:V4=a_end:v5=\xff\xb7:V5=a_dn :\
+        :v6=\xff\xb9:V6=a_ins:v7=\xff\xba:V7=a_del:\
+        :v8=\xff\x33:V8=a_,  :v9=\xff\x34:V9=a_.  :\
+        :w0=\xff\x35:W0=a_// :w1=\xff\x2b:W1=a_\\ :\
+        :w2=\xff\xa0:W2=ctl_u:w3=\xff\xa4:W3=ctl_d:\
+        :w4=\xff\xa2:W4=ctl_5:w5=\xff\xa1:W5=ctl_-:\
+        :w6=\xff\xa3:W6=a_+  :w7=\xff\xa6:W7=c_ins:\
+        :w8=\xff\xa7:W8=c_del:w9=\xff\x9b:W9=ctl_,:\
+        :x0=\xff\x1b:X0=alt_]:x1=\xff\x27:X1=alt_;:\
+        :x2=\xff\x28:X2=alt_':x3=\xff\x29:X3=alt_`:\
+        :x4=\xff\x97:X4=crltb:x5=\xff\xac:X5=alttb:\
+        :x6=\xff\xab:X6=altbs:x7=\xff\xb0:X7=altpgup:\
+        :x8=\xff\x9d:X6=ctl//:x9=\xff\xa5:X9=ctl_ins:\
+        :y0=\xff\x96:Y0=ctl=:y1=\xff\x82:Y1=alt_-:\
+        :y2=\xff\x4c:Y2=num_5:y3=\xff\x1a:Y3=alt[:\
+        :y4=\xff\xb1:Y4=alt_up:\
+        :00=ESC:01=BKSP:02=Ret:03=Ctrl-B:04=Tab:05=Btab:\
+        :06=\x1b:07=\x1a:08=\x18:09=\x19:\
+        :10=Home:11=End:12=PGUP:13=PGDN:14=Insert:15=Delete:\
+        :16=Ctrl-N:17=Ctrl-Y:20=Ctrl-O:21=Ctrl-P:\
+	:GV=\xba:GH=\xcd:GO=\xaf:go=\xaf:\
+	:G1=\xbb:G2=\xc9:G3=\xc8:G4=\xbc:\
+	:GU=\xca:GD=\xcb:GC=\xce:GL=\xcc:GR=\xb9:\
+        :gv=\xb3:gh=\xc4:\
+        :g1=\xbf:g2=\xda:g3=\xc0:g4=\xd9:\
+        :gu=\xc1:gd=\xc2:gc=\xc5:gl=\xc3:gr=\xb4:
+ic|ibmcpc|os2cpc|IBM PC/AT with color terminal:\
+        :ct=\E[3%dm\E[4%dm:\
+        :vc=ibmpc:
+#
+#   Completely tested Qume termcap entry an good example for 
+#   terminals that attributes require a space on the screen
+#
+q1|qvt101|Qume 102 Terminal:\
+        :li#24:co#80:cm=\E=%+ %+ :cl=^Z:cd=\EY:ce=\ET:CF=\E.:CO=\E.:\
+        :am:bs:so=\EG4:se=\EG0:sg#1:us=\EG8:ue=\EG0:ug#1:GS=\E$:\
+        :GE=\E%:GG#0:bo=\EG2:be=\EG0:bb#1:it=\E):ie=\E(:ig#0:zt#1:zc#3:\
+        :a0=\EG3:A0=\EG0:\
+        :a6=\EG<:A6=\EG0:a8=\EG\x3a:A8=\EG0:b2=\EG6:B2=\EG0:\
+        :b3=\EG>:B3=\EG0:GV=j:gv=j:GH=k:gh=k:G2=b:g2=f:G1=c:g1=g:\
+        :G3=a:g3=e:G4=d:g4=h:GL=m:gl=m:GR=l:gr=l:GU=o:gu=o:GD=n:gd=n:\
+        :GC=m:gc=m:GA=k:ga=k:GB=j:gb=j:GF=\x20:gf=\x20:GI=\x20:gi=\x20:\
+        :GJ=X:gj=X:GK=X:gk=X:GM=X:gm=X:GN=X:gn=X:GO=%:go=%:GP=%:gl=%:\
+        :00=ESC:01=BKSP:02=Ret:03=Ctrl-B:04=Tab:05=Ctrl-Q:kl=^H:\
+        :06=Cursor Left:kr=^L:07=Cursor Right:ku=^K:08=Cursor Up:\
+        :kd=^J:09=Cursor Down:kh=^^:10=Home Key:11=Ctrl-Z:12=Ctrl-R:\
+        :13=Ctrl-C:14=Ctrl-V:kk=\x7f:15=Del:16=Ctrl-N:17=Ctrl-Y:\
+        :ck=^Z:20=Clear:21=Ctrl-P:k0=^A@\r:l0=PF1:k1=^AA\r:l1=PF2:\
+        :k2=^AB\r:l2=PF3:k3=^AC\r:l3=PF4:k4=^AD\r:l4=Shift-PF1:\
+        :k5=^AE\r:l5=Shift-PF2:k6=^AF\r:l6=Shift-PF3:k7=^AG\r:l7=Shift-PF4:\
+        :k8=^AH\r:l8=Ctrl-PF1:k9=^AI\r:l9=Ctrl-PF2:m0=^AJ\r:M0=Ctrl-PF3:\
+        :m1=^AK\r:M1=Ctrl-PF4:
+#
+#   Altos Terminals are almost complete the Altos 4 entry has
+#   never been tested
+#
+II|TWO|alt2|altosII|Altos Computer Systems II:\
+        :li#24:co#80:cm=\E[%i%d;%dH:cl=\E[;H\E[2J:cd=\E[J:ce=\E[K:\
+        :CF=\E[>5h:CO=\E[>5l:bs:so=\E[7m:se=\E[m:sg#0:us=\E[4m:ms:ic=\E[@:\
+        :ue=\E[m:ug#0:GS=\E(0:GE=\E(B:GS#0:bo=\E[5m:be=\E[m:bb#0:\
+        :it=\E[2m:ie=\E[m:ig#0:GV=\072:gv=\x33:GH=M:gh=\x44:G2=I:\
+        :g2=\x5A:G1=;:g1=\x3f:G3=H:g3=\x40:G4=<:g4=\x59:GL=\x4c:\
+        :gl=\x43:GR=\x39:gr=\x34:GU=\x4a:gu=\x41:GD=\x4b:gd=\x42:\
+        :GC=\x4e:gc=\x45:GA=\x4d:ga=\x44:GB=\x3a:gb=\x33:GF=\x20:\
+        :gf=\x20:GI=\x20:gi=\x20:GJ=X:gj=X:GK=X:gk=X:GM=X:gm=X:\
+        :GN=X:gn=X:GO=%:go=%:GP=%:gl=%:00=ESC:01=BKSP:02=Ret:\
+        :03=Ctrl-B:04=Tab:05=Ctrl-Q:kl=\E[D:06=Cursor Left:\
+        :kr=\E[C:07=Cursor Right:ku=\E[A:08=Cursor Up:kd=\E[B:\
+        :09=Cursor Down:kh=\E[f:10=Home Key:11=Ctrl-Z:PU=\E[T:\
+        :12=Prev Page:PD=\E[S:13=Next Page:ki=\E[@:14=Ins Char:\
+        :kk=\E[P:15=Del Char:LI=\E[L:16=Ins Line:LD=\E[M:17=Del Line:\
+        :kp=^AP\r:18=Help:ck=\EOP:20=CLR:21=Ctrl-P:zt#2:zc#3:\
+        :k0=^A@\r:l0=F1:k1=^AA\r:l1=F2:k2=^AB\r:l2=F3:k3=^AC\r:l3=F4:\
+        :k4=^AD\r:l4=F5:k5=^AE\r:l5=F6:k6=^AF\r:l6=F7:k7=^AG\r:l7=F8:\
+        :k8=^AH\r:l8=F9:k9=^AI\r:l9=F10:m0=^AJ\r:M0=F11:m1=^AK\r:M1=F12:\
+        :m2=^AL\r:M2=F13:m3=^AM\r:M3=F14:m4=^AN\r:M4=F15:m5=^AO\r:M5=F16:\
+        :m6=^A\x60\r:M6=Shift-F1:m7=^Aa\r:M7=Shift-F2:m8=^Ab\r:M8=Shift-F3:\
+        :m9=^Ac\r:M9=Shift-F4:n0=^Ad\r:N0=Shift-F5:n1=^Ae\r:N1=Shift-F6:\
+        :n2=^Af\r:N2=Shift-F6:n3=^Ag\r:N3=Shift-F8:n4=^Ah\r:N4=Shift-F9:\
+        :n5=^Ai\r:N5=Shift-F10:n6=^Aj\r:N6=Shift-F11:n7=^Ak\r:N7=Shift-F12:\
+        :n8=^Al\r:N8=Shift-F13:n9=^Am\r:N9=Shift-F14:o0=^An\r:O0=Shift-F15:\
+        :o1=^Ao\r:O1=Shift-F16:
+a4|altos4|Altos 4 Terminal:\
+        :li#24:co#80:cm=\E=%+ %+ :cl=\E+:cd=\EY:ce=\ET:CF=\E`0:CO=\E`1:\
+        :am:bs:so=\EG4:se=\EG0:sg#1:us=\EG8:ue=\EG0:ug#1:GS=\EH^B:\
+        :GE=\EH^C:GG#0:bo=\EG2:be=\EG0:bb#1:it=\EGp:ie=\EG0:ig#1:\
+        :a6=\EG<:A6=\EG0:a8=\EG\x3a:A8=\EG0:b2=\EG6:B2=\EG0:\
+        :a3=\EGx:A3=\EG0:a7=\EGt:A7=\EG0:\
+        :b3=\EG>:B3=\EG0:GV=6:gv=6:GH=/x3a:gh=/x3a:G2=2:g2=2:G1=3:g1=3:\
+        :G3=1:g3=1:G4=5:g4=5:GL=4:gl=4:GR=9:gr=9:GU==:gu==:GD=0:gd=0:\
+        :GC=8:gc=8:GA=<:ga=<:GB=>:gb=>:GF=\x20:gf=\x20:GI=\x20:gi=\x20:\
+        :GJ=X:gj=X:GK=X:gk=X:GM=X:gm=X:GN=X:gn=X:GO=%:go=%:GP=%:gl=%:\
+        :00=ESC:01=BKSP:02=Ret:03=Ctrl-B:04=Tab:05=Ctrl-Q:kl=^H:\
+        :06=Cursor Left:kr=^L:07=Cursor Right:ku=^K:08=Cursor Up:\
+        :kd=^J:09=Cursor Down:kh=^^:10=Home Key:11=Ctrl-Z:12=Ctrl-R:\
+        :13=Ctrl-C:14=Ctrl-V:kk=\x7f:15=Del:16=Ctrl-N:17=Ctrl-Y:\
+        :ck=^Z:20=Clear:21=Ctrl-P:\
+        :k0=^A@\r:l0=F1:k1=^AA\r:l1=F2:k2=^AB\r:l2=F3:k3=^AC\r:l3=F4:\
+        :k4=^AD\r:l4=F5:k5=^AE\r:l5=F6:k6=^AF\r:l6=F7:k7=^AG\r:l7=F8:\
+        :k8=^AH\r:l8=F9:k9=^AI\r:l9=F10:m0=^AJ\r:M0=F11:m1=^AK\r:M1=F12:\
+        :m2=^AL\r:M2=F13:m3=^AM\r:M3=F14:m4=^AN\r:M4=F15:m5=^AO\r:M5=F16:\
+        :m6=^A\x60\r:M6=Shift-F1:m7=^Aa\r:M7=Shift-F2:m8=^Ab\r:M8=Shift-F3:\
+        :m9=^Ac\r:M9=Shift-F4:n0=^Ad\r:N0=Shift-F5:n1=^Ae\r:N1=Shift-F6:\
+        :n2=^Af\r:N2=Shift-F6:n3=^Ag\r:N3=Shift-F8:n4=^Ah\r:N4=Shift-F9:\
+        :n5=^Ai\r:N5=Shift-F10:n6=^Aj\r:N6=Shift-F11:n7=^Ak\r:N7=Shift-F12:\
+        :n8=^Al\r:N8=Shift-F13:n9=^Am\r:N9=Shift-F14:o0=^An\r:O0=Shift-F15:\
+        :o1=^Ao\r:O1=Shift-F16:
+#
+#   The IBM ansi description should be complete and work on the
+#   console of UNIX PC AT386.  For color TERM  = at386c
+#
+at386|AT386|UNIX V PC with 12 function Keys:\
+	:am:bs:cd=\E[J:ce=\E[K:cl=\E[2J\E[H:cm=\E[%i%d;%dH:co#80:\
+	:bt=\x1d:ik=\E[@:li#25:zt#4:zc#1:ms:ho=\E[H:ic=\E[@:\
+	:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:up=\E[A:\
+        :bo=\E[5m:be=\E[m:it=\E[1m:ie=\E[m:\
+	:ku=\E[A:kd=\E[B:kl=\E[D:kr=\E[C:\
+        :ki=\E[\x40:kk=\E[P|\x7f:ek=\E[G:\
+	:kh=\E[H:EN=\E[Y:PU=\E[V:PD=\E[U:\
+	:GV=\xba:GH=\xcd:go=\xaf:GO=\xaf:\
+	:G1=\xbb:G2=\xc9:G3=\xc8:G4=\xbc:\
+	:GU=\xca:GD=\xcb:GC=\xce:GL=\xcc:GR=\xb9:\
+        :gv=\xb3:gh=\xc4:kz=\E:\
+        :g1=\xbf:g2=\xda:g3=\xc0:g4=\xd9:\
+        :gu=\xc1:gd=\xc2:gc=\xc5:gl=\xc3:gr=\xb4:\
+        :00=ESC:01=BKSP:02=Ret:03=Ctrl-B:04=Tab:05=Btab:\
+        :06=Cursor Left:07=Cursor Right:08=Cursor Up:09=Cursor Down:\
+        :10=Home:11=End:12=PGUP:13=PGDN:14=Insert:15=Delete:\
+        :16=Ctrl-N:17=Ctrl-Y:19=Nbr-5:20=Ctrl-O:21=Ctrl-P:\
+        :k0=\EOP:l0=F1:k1=\EOQ:l1=F2:\
+        :k2=\EOR:l2=F3:k3=\EOS:l3=F4:\
+        :k4=\EOT:l4=F5:k5=\EOU:l5=F6:\
+        :k6=\EOV:l6=F7:k7=\EOW:l7=F8:\
+        :k8=\EOX:l8=F9:k9=\EOY:l9=F10:\
+        :m0=\EOp:M0=sF1:m1=\EOq:M1=sF2:\
+        :m2=\EOr:M2=sF3:m3=\EOs:M3=sF4:\
+        :m4=\EOt:M4=sF5:m5=\EOu:M5=sF6:\
+        :m6=\EOv:M6=sF7:m7=\EOw:M7=sF8:\
+        :m8=\EOx:M8=sF9:m9=\EOy:M9=sF10:\
+        :n0=\E[k:N0=cF1:n1=\E[l:N1=cF2:\
+        :n2=\E[m:N2=cF3:n3=\E[n:N3=cF4:\
+        :n4=\E[o:N4=cF5:n5=\E[p:N5=cF6:\
+        :n6=\E[q:N6=cF7:n7=\E[r:N7=cF8:\
+        :n8=\E[s:N8=cF9:n9=\E[t:N9=cF10:\
+        :o0=\E[w:O0=csF1:o1=\E[x:O1=csF2:\
+        :o2=\E[y:O2=csF3:o3=\E[z:O3=csF4:\
+        :o4=\E[\x7b:O4=csF5:o5=\E[[:O5=csF6:\
+        :o6=\E[\x5c:O6=csF7:o7=\E[]:O7=csF8:\
+        :o8=\E[\x5e:O8=csF9:o9=\E[\x5f:O9=csF10:\
+        :p0=\E[W:P0=F11:p1=\E[X:P1=F12:\
+        :p2=\E[i:P2=sF11:p3=\E[j:P3=sF12:\
+        :p4=\E[u:P4=cF11:p5=\E[v:P5=cF12:\
+        :p6=\E[\x60:P6=csF11:p7=\E[\x7b:P7=csF12:
+at386c|AT386C|UNIX V color PC with 12 Function Keys:\
+        :ct=\E[3%dm\E[4%dm:\
+        :vc=at386:
+#
+# Xwindows
+# 
+vs|xterm|vs100|xterm terminal emulator (X window system):\
+	:cr=^M:do=^J:nl=^J:bl=^G:le=^H:ho=\E[H:zc#6:zt#99:ms:\
+	:co#80:li#65:cl=\E[H\E[2J:bs:am:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
+	:ce=\E[K:cd=\E[J:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:\
+	:md=\E[1m:mr=\E[7m:me=\E[m:kk=\x7f:ki=\E[2~:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kb=^H:\
+	:k0=\E[11~:k1=\E[12~:k2=\E[13~:k3=\E[14~:k4=\E[15~:\
+	:ta=^I:pt:sf=\n:sr=\EM:\
+	:al=\E[L:dl=\E[M:ic=\E[@:dc=\E[P:\
+	:MT:ks=\E[?1h\E=:ke=\E[?1l\E>:\
+	:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;3;4;6l:\
+	:rs=\E[r\E<\E[m\E[2J\E[H\E[?7h\E[?1;3;4;6l:xn:\
+	:AL=\E[%dL:DL=\E[%dM:IC=\E[%d@:DC=\E[%dP:\
+	:ti=\E7\E[?47h:te=\E[2J\E[?47l\E8:\
+	:hs:ts=\E[?E\E[?%i%dT:fs=\E[?F:ds=\E[?E:\
+	:GS=\E(0:GE=\E(B:\
+	:GV=x:gv=x:GH=q:gh=q:G2=l:g2=l:G1=k:g1=k:\
+	:G3=m:g3=m:G4=j:g4=j:GL=t:gl=t:GR=u:gr=u:\
+	:GU=v:gu=v:GD=w:gd=w:GC=n:gc=n:GA=`:ga=~:\
+	:GB=`:gb=~:GF=`:gf=~:GI=`:gi=~:GJ=`:gj=~:\
+	:GK=`:gk=~:GM=`:gm=~:GN=`:gn=~:GO=>:go=>:\
+	:GP=`:gl=~:
+v2|xterms|vs100s|xterm terminal emulator (small)(X window system):\
+	:co#80:li#24:vc=xterm:
+#
+#  
+#
+2392|2622|hp2392|hp2622|HP:\
+	:li#24:co#80:cm=\E&a%dr%dC:cl=\EH\EJ:cd=\EJ:ce=\EK:CF=\E*dR:\
+	:CO=\E*dQ:bs:so=\E&dB:se=\E&d@:sg#0:us=\E&dD:ue=\E&d@:ug#0:\
+	:GS=:GE=:GG#0:bo=\E&dA:be=\E&d@:bb#0:it=\E&dH:zt#2:zc#3:\
+	:ie=\E&d@:ig#0:a3=\E&dL:A3=\E&d@:a6=\E&dF:A6=\E&d@:a7=\E&dJ:\
+	:A7=\E&d@:a8=\E&dE:A8=\E&d@:b2=\E&dC:B2=\E&d@:b3=\E&dG:am:xs:\
+	:b1=\E&dI:B1=\E&d@:B3=\E&d@:b4=\E&dK:B4=\E&d@:b5=\E&dO:B5=\E&d@:\
+        :b0=\E&dM:B0=\E&d@:\
+        :GV=\x3a:gv=.:GH=;:gh=,:G2=Q:g2=R:G1=W:g1=T:G3=A:g3=F:\
+	:G4=S:g4=G:GL=1:gl=5:GR=2:gr=6:GU=4:gu=8:GD=3:gd=7:GC=0:gc=\\:\
+	:00=ESC:01=BKSP:02=RET:03=^B:04=TAB:bt=\Ei:05=BTAB:\
+	:kl=\ED:06=Cursor Left:kr=\EC:07=Cursor Right:ku=\EA:\
+	:08=Cursor Up:kd=\EB:09=Cursor down:kh=\EH:10=HOME:EN=\EF:\
+	:11=Home Down:PU=\EV:12=PgUp:PD=\EU:13=PgDn:ki=\EQ:14=Ins Char:\
+	:kk=\EO:15=Del Char:LI=\EL:16=Ins Line:LD=\EM:17=Del Line:\
+	:ck=\EJ:20=Clear Disp:k0=\Ep:k1=\Eq:
+#
+#
+#      Setup New Terminal 
+#       (Underlines should be replaced with the commands of the
+#        new terminal)
+#
+newterm|anothername|Long Name With Spaces:\
+        :li#___:\           # Number of rows and columns on terminal 
+        :co#___:\           # (In decminal, counting from 1 )
+        :cm=______:\        # Cursor Addressing sequence (see manual)
+        :cl=______:\        # Clear Screen command
+#       :cd=______:\        # Clear to end of display command
+#       :ce=______:\        # Clear to end of line command
+#       :CF=______:\        # Cursor off command (if available)
+#       :CO=______:\        # Cursor on command (if available)
+#       :ve=______:\        # Turn on normal cursor (sent after CO)
+#       :vs=______:\        # Turn on alternate cursor (sent after CO)
+#       :am:\               # If terminal has automatic margins
+#       :bs:\               # If terminal can back space with Ctrl-H
+#       :zt#__:\            # Delay for keyboard input 
+#       :zc#__:\            # Number of character to read on keyboard input
+#       :zk#_:\             # '1' if keyrdy() function does not work
+#       **************************************************************
+#       *                  SETUP TERMINAL KEYBOARD                   *
+#       **************************************************************
+#       :kz=______:\        # ESC key 
+#       :kb=______:\        # Backspace key 
+#       :cr=______:\        # Return key 
+#       :bk=______:\        # Break key 
+#       :ta=______:\        # Tab key 
+#       :bt=______:\        # Back tab key 
+#       :kl=______:\        # Cursor left key 
+#       :kr=______:\        # Cursor right key
+#       :ku=______:\        # Cursor up
+#       :kd=______:\        # Cursor down
+#       :kh=______:\        # Home key
+#       :EN=______:\        # End key
+#       :PU=______:\        # Page up key
+#       :PD=______:\        # Page down key
+#       :ki=______:\        # Insert key
+#       :kk=______:\        # Delete key
+#       :LI=______:\        # Insert line key
+#       :LD=______:\        # Delete line key
+#       :kp=______:\        # Help key
+#       :ek=______:\        # Enter key
+#       :ck=______:\        # Clear key
+#       :pk=______:\        # Print key
+#       :k0=______:\        # First function key
+#       :k1=______:\        # Second function key
+#       :k2 .... z9         # Function keys 3 - 150
+#       **************************************************************
+#       *               IF WANT TO SETUP KEY LABELS                  *
+#       **************************************************************
+#       :00=______:\        # Label for the ESC key
+#       :01=______:\        # Label for Backspace key
+#       :02=______:\        # Label for Return Key
+#       :03=______:\        # Label for the Break key
+#       :04=______:\        # Label for the Tab key
+#       :05=______:\        # Label for the Back-tab key
+#       :06=______:\        # Label for Cursor left key
+#       :07=______:\        # Label for Cursor Right key
+#       :08=______:\        # Label for Cursor Up key
+#       :09=______:\        # Label for Cursor Down key
+#       :10=______:\        # Label for Home key
+#       :11=______:\        # Label for End key
+#       :12=______:\        # Label for Page Up key
+#       :13=______:\        # Label for Page Down key
+#       :14=______:\        # Label for Insert key
+#       :15=______:\        # Label for Delete key
+#       :16=______:\        # Label for Insert line key
+#       :17=______:\        # Label for Delete line key
+#       :18=______:\        # Label for Help key
+#       :19=______:\        # Label for Enter key
+#       :20=______:\        # Label for Clear key
+#       :21=______:\        # Label for Print key
+#       :l0=______:\        # Label for first function key
+#       :l1=______:\        # Label for second function key
+#       :l2 ....Z9:\        # Labels for function keys 3 - 150
+#       **************************************************************
+#       *                  SETUP GRAPHIC CHARACTERS                  *
+#       *    GRAPHICS CHARACTERS CAN ONLY BE A SINGLE CHARACTER !!   *
+#       *    ENTER THE ASC CHARACTER ('a') OR THE HEX VALUE (\x61)   *
+#       **************************************************************
+#       :GV=_:\             # Vertical line '|' for box (1)
+#       :GH=_:\             # Horizontal line '=' for box (1)
+#       :G2=_:\             # Upper left corner "+" for box (1)
+#       :G1=_:\             # Upper right corner "+" for box (1)
+#       :G3=_:\             # Lower left corner "+" for box (1)
+#       :G4=_:\             # Lower right corner "+" for box (1)
+#       :GL=_:\             # Left tee "+" for box(1)
+#       :GR=_:\             # Right tee "+" for box (1)
+#       :GU=_:\             # Bottom tee "+" for box (1)
+#       :GD=_:\             # Top tee "+" for box (1)
+#       :GC=_:\             # Middle intersection "+" for box (1)
+#       :GM=_:\             # Point left character "<" for box (1)
+#       :GN=_:\             # Point right character ">" for box (1)
+#       :GO=_:\             # Point up character "^" for box (1)
+#       :GP=_:\             # Point down character "v" for box (1)
+#       :GA=_:\             # Scroll bar across fill char. " " for box (1)
+#       :GB=_:\             # Scroll bar up fill character " " for box (1)
+#       :GF=_:\             # Scroll bar across status char. "#" for box (1)
+#       :GI=_:\             # Scroll bar up status character "#" for box (1) 
+#       :GJ=_:\             # Scroll bar end character "+" for box (1)
+#       :GK=_:\             # Scroll bar middle character "+" for box (1)
+#       :gv=_:\             # Vertical line '|' for box (2)
+#       :gh=_:\             # Horizontal line "=" for box (2)
+#       :g2=_:\             # Upper left corner "+" for box (2)
+#       :g1=_:\             # Upper right corner "+" for box (2)
+#       :g3=_:\             # Lower left corner "+" for box (2)
+#       :g4=_:\             # Lower right corner "+" for box (2)
+#       :gl=_:\             # Left tee "+" for box (2)
+#       :gr=_:\             # Right tee "+" for box(2)
+#       :gu=_:\             # Bottom tee "+" for box (2)
+#       :gd=_:\             # Top tee "+" for box (2)
+#       :gc=_:\             # Middle intersection "+" for box (2)
+#       :gm=_:\             # Point left character "<" for box (2)
+#       :gn=_:\             # Point right character ">" for box (2)
+#       :go=_:\             # Point up character "^" for box (2)
+#       :gp=_:\             # Point down character "v" for box (2)
+#       :ga=_:\             # Scroll bar across fill char. " " for box (2)
+#       :gb=_:\             # Scroll bar up fill character " " for box (2)
+#       :gf=_:\             # Scroll bar across status char. "#" for box (2) 
+#       :gi=_:\             # Scroll bar up status character "#" for box (2)
+#       :gj=_:\             # Scroll bar end character "+" for box (2)
+#       :gk=_:\             # Scroll bar middle character "+" for box (2)
+#       **************************************************************
+#       *                  SETUP TERMINAL ATTRIBUTES                 *
+#       **************************************************************
+#       :ms:\               # If cursor can move while in mode (i.e. inverse)
+#       :so=______:\        # Start inverse mode
+#       :se=______:\        # End inverse mode
+#       :sg#_:\             # '1' if inverse mode uses a space on screen
+#       :us=______:\        # Start underline mode
+#       :ue=______:\        # End underline mode
+#       :ug#_:\             # '1' if underline mode uses a space on screen
+#       :GS=______:\        # Start graphics mode
+#       :GE=______:\        # End graphics mode
+#       :GG#_:\             # '1' if graphics mode uses a space on screen
+#       :bo=______:\        # Start blinking mode
+#       :be=______:\        # End blinking mode
+#       :bb#_:\             # '1' if blinking mode uses a space on screen
+#       :it=______:\        # Start high intensity
+#       :ie=______:\        # End high intensity
+#       :ig#_:\             # '1' if high intensity uses a space on screen
+#       **************************************************************
+#       *     THE FOLLOWING ARE ONLY IF THE TERMINAL REQUIRES ONE    *
+#       *     COMMAND INSTEAD OF TWO COMMANDS TO SET COMBINATION     *
+#       *     CHARACTERS !!!!!!                                      *
+#       **************************************************************
+#       :a3=______:\        # Start hi-light/underline
+#       :A3=______:\        # End hi-light/underline
+#       :a6=______:\        # Start inverse/underline
+#       :A6=______:\        # End inverse/underline
+#       :a7=______:\        # Start hi-light/reverse
+#       :A7=______:\        # End hi-light/reverse
+#       :a8=______:\        # Start blink/underline
+#       :A8=______:\        # End blink/underline
+#       :b0=______:\        # Start blink/underline/hi-light
+#       :B0=______:\        # End blink/underline/hi-light
+#       :b1=______:\        # Start blink/hi-light
+#       :B1=______:\        # End blink/hi-light
+#       :b2=______:\        # Start blink/inverse
+#       :B2=______:\        # End blink/inverse
+#       :b3=______:\        # Start blink/inverse/underline
+#       :B3=______:\        # End blink/inverse/underline
+#       :b4=______:\        # Start blink/inverse/hi-light
+#       :B4=______:\        # End blink/inverse/hi-light
+#       :b5=______:\        # Start blink/inverse/underline/hi-light
+#       :B5=______:\        # End blink/inverse/underline/hi-light
+#       **************************************************************
+#       *             TO USE OTHER TERMINAL ATTRIBUTES               *
+#       **************************************************************
+#       :vc=______:        # Enter terminal's name - (MUST BE LAST ENTRY)
+#       **************************************************************
+#       *              LAST ENTRY SHOULD END WITH ':'                *
+#       **************************************************************
+        :last_entry:        # Last entry should end with ':'
+
+

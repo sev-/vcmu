@@ -1,0 +1,43 @@
+/**
+*   This file may be #included to help when porting from
+*   other versions of Vitamin C to Vitamin C Multi-user.
+**/
+
+#define addvcmstyle(a,b,c,d,e,f,g,h) addmstyle(a,b,c,d,e,f,g,h)
+#define chgvcmstyle(a,b,c,d,e,f,g,h,i) chgmstyle(a,b,c,d,e,f,g,h,i)
+#define delvcmstyle(a) delmstyle(a)
+#define getvcmstyle(a) getmstyle(a)
+/*
+#define statlin(x,y) statlin((WPTR)NULL,x,y,msgattr)
+#define tblalloc(a) tblalloc(a,-1,NULLFUNC)
+*/
+#define statwno() statwdo()
+#define xxatgetc xxatcget
+#define wtodisk wdotofil
+#define vckbfunc vctrap
+#define vcerrno vcerror
+#define cs_row  vcrow
+#define cs_col vccol
+#define msgwno msgwdo
+#define vctimwno vctimwdo
+#define debugfunc vcdbfunc
+#define vcdgt dftgettbl
+#define vcdgcw dgetctrl
+#define VCCOL vcterm.cols
+#define VCROW vcterm.rows
+#define wcurrent wdoctrl->wcurrent
+#define wno_opn wdoctrl->wno_opn
+#define wfreeze wdoctrl->wfreeze
+#define wstdctrl wdoctrl->wstdctrl
+#define VCVRAM vcvram
+#define VCSPRT vcsprt
+#define VC_VIO vctio
+#define wscreen wdoctrl->wscreen
+#define wbscreen wdoctrl->wbscreen
+#define vcmhook1 vcmhk1
+#define vcmhook2 vcmhk2
+#define vcmhook3 vcmhk3
+#define vcmhook4 vcmhk4
+#define vcmhook5 vcmhk5
+#define vcstatlin(a,b,c,d) statlin(a,b,c,d)
+
